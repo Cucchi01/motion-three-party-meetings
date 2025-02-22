@@ -1,5 +1,6 @@
 weights/
 data/videos/
+.vscode/
 
 
 # Byte-compiled / optimized / DLL files

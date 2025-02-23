@@ -19,15 +19,23 @@ print(f"FPS: {fps}; Num frames: {num_frames}; duration: {num_frames/fps:.2f} s")
 
 list_magnitudes = []
 
-# Read the first frame and convert to grayscale
-ret, prev_frame = cap.read()
-prev_gray = cv2.cvtColor(prev_frame, cv2.COLOR_BGR2GRAY)
-
-
 visualize = False
 visualize_every_num_frames = 30
 # do not consider all the frames to lower the amount of computations
 keep_every_num_frame = 10
+downsample_rate = 4
+
+# Read the first frame and convert to grayscale
+ret, prev_frame = cap.read()
+prev_frame = cv2.GaussianBlur(
+    prev_frame, (5, 5), 1 / (2 * downsample_rate)
+)  # kernel size and standard deviation
+prev_frame = cv2.resize(
+    prev_frame,
+    (prev_frame.shape[1] // downsample_rate, prev_frame.shape[0] // downsample_rate),
+)
+prev_gray = cv2.cvtColor(prev_frame, cv2.COLOR_BGR2GRAY)
+
 
 for num_frame in tqdm(range(0, int(num_frames), keep_every_num_frame)):
     if not cap.isOpened():
@@ -38,6 +46,14 @@ for num_frame in tqdm(range(0, int(num_frames), keep_every_num_frame)):
     ret, frame = cap.read()
     if not ret:
         break
+
+    # smooth and downsample
+    frame = cv2.GaussianBlur(
+        frame, (5, 5), 1 / (2 * downsample_rate)
+    )  # kernel size and standard deviation
+    frame = cv2.resize(
+        frame, (frame.shape[1] // downsample_rate, frame.shape[0] // downsample_rate)
+    )
 
     # Convert to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

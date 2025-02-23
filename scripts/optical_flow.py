@@ -2,6 +2,7 @@ import constants
 import cv2
 import dlib
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
@@ -101,3 +102,25 @@ for num_frame in tqdm(range(0, int(num_frames), keep_every_num_frame)):
     prev_gray = gray
 
 cap.release()
+
+# computer average motion for each window
+
+# length in seconds seconds
+window_length = 5
+num_frames_per_window = int(window_length * fps / keep_every_num_frame)
+
+magnitudes = np.array(list_magnitudes)
+
+print(np.insert(magnitudes, 0, 0))
+cumsums = np.cumsum(np.insert(magnitudes, 0, 0))
+averages = (cumsums[num_frames_per_window:] - cumsums[:-num_frames_per_window]) / float(
+    num_frames_per_window
+)
+print(averages)
+averages = averages[::num_frames_per_window]
+timestamps = np.arange(averages.shape[0]) * window_length
+
+data = pd.DataFrame()
+data["Averages"] = averages
+data["Timestamp"] = timestamps
+print(data)

@@ -29,4 +29,5 @@ class OpticalFlowConstansts:
     KEEP_EVERY_NUM_FRAMES = 10
     DOWNSAMPLE_RATE = 2
 
+    AVERAGE_BY_WINDOW = False
     WINDOW_LENGTH = 2.0

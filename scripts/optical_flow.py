@@ -153,32 +153,40 @@ def compute_motions(
 
     cap.release()
 
-    # computer average motion for each window
-
-    # length in seconds seconds
-    window_length = OpticalFlowConstansts.WINDOW_LENGTH
-    num_frames_per_window = int(
-        window_length * fps / OpticalFlowConstansts.KEEP_EVERY_NUM_FRAMES
-    )
-
     magnitudes = np.array(list_magnitudes)
+    if OpticalFlowConstansts.AVERAGE_BY_WINDOW:
+        # computer average motion for each window
 
-    cumsums = np.cumsum(np.insert(magnitudes, 0, 0))
-    averages = (
-        cumsums[num_frames_per_window:] - cumsums[:-num_frames_per_window]
-    ) / float(num_frames_per_window)
-    averages = averages[::num_frames_per_window]
+        # length in seconds seconds
+        window_length = OpticalFlowConstansts.WINDOW_LENGTH
+        num_frames_per_window = int(
+            window_length * fps / OpticalFlowConstansts.KEEP_EVERY_NUM_FRAMES
+        )
 
-    # add last partial window
-    if (magnitudes.shape[0]) % num_frames_per_window != 0:
-        start_pos = averages.shape[0] * num_frames_per_window
-        averages = np.hstack([averages, np.average(magnitudes[start_pos:])])
+        cumsums = np.cumsum(np.insert(magnitudes, 0, 0))
+        averages = (
+            cumsums[num_frames_per_window:] - cumsums[:-num_frames_per_window]
+        ) / float(num_frames_per_window)
+        averages = averages[::num_frames_per_window]
 
-    timestamps = np.arange(averages.shape[0]) * window_length
+        # add last partial window
+        if (magnitudes.shape[0]) % num_frames_per_window != 0:
+            start_pos = averages.shape[0] * num_frames_per_window
+            averages = np.hstack([averages, np.average(magnitudes[start_pos:])])
 
-    data = pd.DataFrame()
-    data["Averages"] = averages
-    data["Timestamp"] = timestamps
+        timestamps = np.arange(averages.shape[0]) * window_length
+
+        data = pd.DataFrame()
+        data["Averages"] = averages
+        data["Timestamp"] = timestamps
+    else:
+        # report each timestamp
+        seconds_per_frame = OpticalFlowConstansts.KEEP_EVERY_NUM_FRAMES / fps
+        timestamps = np.arange(magnitudes.shape[0]) * seconds_per_frame
+
+        data = pd.DataFrame()
+        data["AVG_Optical_Flow"] = magnitudes
+        data["Timestamp"] = timestamps
 
     # save the data
     data.to_csv(feature_path, index=False)

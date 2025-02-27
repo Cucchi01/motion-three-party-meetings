@@ -7,7 +7,10 @@ CURRENT_PATH = CURRENT_PATH.resolve()
 while CURRENT_PATH.absolute().parts[-1] != "motion-three-party-meetings":
     CURRENT_PATH = CURRENT_PATH.parent
 
-FOLDER_VIDEOS = Path(*CURRENT_PATH.absolute().parts, "data", "videos")
+FOLDER_VIDEOS = Path(*CURRENT_PATH.absolute().parts, "data", "video", "channels")
+FOLDER_VIDEOS_ORIGINAL = Path(
+    *CURRENT_PATH.absolute().parts, "data", "MEETdata-group13", "videos"
+)
 FOLDER_FEATURES = Path(*CURRENT_PATH.absolute().parts, "data", "features")
 FOLDER_FEATURES_MOTION = FOLDER_FEATURES.joinpath("motions")
 

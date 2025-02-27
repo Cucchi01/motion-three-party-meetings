@@ -40,7 +40,7 @@ def compute_motions(
     else:
         estimated_time_left = (
             (tot_num_videos - current_num_file + 1)
-            * (timeit.default_timer() - start)
+            * (timeit.default_timer() - start_time)
             / (current_num_file - 1)
         )
         print(

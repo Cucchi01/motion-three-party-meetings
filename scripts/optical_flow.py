@@ -31,6 +31,19 @@ def compute_motions(
 
     current_num_file += 1
 
+    # output path
+    relative_pos_index = path.parts.index(FOLDER_VIDEOS.name)
+    feature_path = constants.FOLDER_FEATURES_MOTION.joinpath(
+        *path.parts[relative_pos_index + 1 :]
+    )
+    if not feature_path.parent.exists():
+        os.makedirs(feature_path.parent)
+    feature_path = feature_path.with_suffix(".csv")
+
+    # features already computed for this video
+    if feature_path.exists():
+        return current_num_file
+
     # load video and metadata
     cap = cv2.VideoCapture(str(path))
     fps = cap.get(cv2.CAP_PROP_FPS)
@@ -168,13 +181,6 @@ def compute_motions(
     data["Timestamp"] = timestamps
 
     # save the data
-    relative_pos_index = path.parts.index(FOLDER_VIDEOS.name)
-    feature_path = constants.FOLDER_FEATURES_MOTION.joinpath(
-        *path.parts[relative_pos_index + 1 :]
-    )
-    if not feature_path.parent.exists():
-        os.makedirs(feature_path.parent)
-    feature_path = feature_path.with_suffix(".csv")
     data.to_csv(feature_path, index=False)
 
     return current_num_file

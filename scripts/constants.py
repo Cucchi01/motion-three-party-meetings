@@ -27,6 +27,6 @@ class OpticalFlowConstansts:
     VISUALIZE_EVERY_NUM_FRAMES = 30
     # do not consider all the frames to lower the amount of computations
     KEEP_EVERY_NUM_FRAMES = 10
-    DOWNSAMPLE_RATE = 4
+    DOWNSAMPLE_RATE = 2
 
     WINDOW_LENGTH = 2.0

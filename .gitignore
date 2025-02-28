@@ -1,8 +1,8 @@
 weights/
-data/videos/
+data/video/
+data/MEETdata-group13/
+data/MEETdata-group13.zip
 .vscode/
-data/
-
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

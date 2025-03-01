@@ -21,17 +21,17 @@ SHAPE_PREDICTOR_PATH = Path(
     *CURRENT_PATH.absolute().parts, "weights", "shape_predictor_68_face_landmarks.dat"
 )
 
-USE_RAFT_LARGE = False
-
 
 class OpticalFlowConstansts:
-    PADDING_BOX_BOTTOM_FACE = 10
-    VISUALIZE = True
-    VIDEO_TEST = True
-    VISUALIZE_EVERY_NUM_FRAMES = 30
+    USE_RAFT_LARGE = True
+
+    PADDING_BOX_BOTTOM_FACE = 60
+    VISUALIZE = False
+    VIDEO_TEST = False
     # do not consider all the frames to lower the amount of computations
     KEEP_EVERY_NUM_FRAMES = 10
-    DOWNSAMPLE_RATE = 2
+    VISUALIZE_EVERY_NUM_FRAMES = 2
+    DOWNSAMPLE_RATE = 1
 
     AVERAGE_BY_WINDOW = False
     WINDOW_LENGTH = 2.0

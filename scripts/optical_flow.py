@@ -19,20 +19,28 @@ predictor = dlib.shape_predictor(str(constants.SHAPE_PREDICTOR_PATH))
 
 # Open video file
 def compute_motions(
-    path: Path, current_num_file: int, tot_num_videos: int, start_time
+    path: Path,
+    current_num_file: int,
+    tot_num_videos: int,
+    start_time,
+    initial_parent_folder: str,
 ) -> int:
     if path.is_dir():
         # scan the folder recursively
         for file in path.iterdir():
             current_num_file = compute_motions(
-                file, current_num_file, tot_num_videos, start_time
+                file,
+                current_num_file,
+                tot_num_videos,
+                start_time,
+                initial_parent_folder,
             )
         return current_num_file
 
     current_num_file += 1
 
     # output path
-    relative_pos_index = path.parts.index(FOLDER_VIDEOS.name)
+    relative_pos_index = path.parts.index(initial_parent_folder)
     feature_path = constants.FOLDER_FEATURES_MOTION.joinpath(
         *path.parts[relative_pos_index + 1 :]
     )
@@ -141,11 +149,20 @@ def compute_motions(
         # show output
         if (
             OpticalFlowConstansts.VISUALIZE
-            and num_frame % OpticalFlowConstansts.VISUALIZE_EVERY_NUM_FRAMES == 0
+            and (num_frame // OpticalFlowConstansts.KEEP_EVERY_NUM_FRAMES)
+            % OpticalFlowConstansts.VISUALIZE_EVERY_NUM_FRAMES
+            == 0
         ):
             print("Average magnitude: ", list_magnitudes[-1])
             fig, ax = plt.subplots()
             ax.imshow(magnitude)
+            ax.tick_params(
+                axis="y", which="both", left=False, right=False, labelleft=False
+            )
+            ax.tick_params(
+                axis="x", which="both", bottom=False, top=False, labelbottom=False
+            )
+            plt.tight_layout()
             plt.show()
 
         # update previous frame
@@ -199,9 +216,15 @@ total_number_videos = sum(
 )
 print(f"Total number of videos: {total_number_videos}")
 start = timeit.default_timer()
+if OpticalFlowConstansts.VIDEO_TEST:
+    videos_path = constants.FOLDER_VIDEOS_TEST
+else:
+    videos_path = constants.FOLDER_VIDEOS
+
 compute_motions(
-    constants.FOLDER_VIDEOS,
+    videos_path,
     current_num_file=0,
     tot_num_videos=total_number_videos,
     start_time=start,
+    initial_parent_folder=videos_path.name,
 )

@@ -8,6 +8,9 @@ while CURRENT_PATH.absolute().parts[-1] != "motion-three-party-meetings":
     CURRENT_PATH = CURRENT_PATH.parent
 
 FOLDER_VIDEOS = Path(*CURRENT_PATH.absolute().parts, "data", "video", "channels")
+FOLDER_VIDEOS_TEST = Path(
+    *CURRENT_PATH.absolute().parts, "data", "video", "videos_test"
+)
 FOLDER_VIDEOS_ORIGINAL = Path(
     *CURRENT_PATH.absolute().parts, "data", "MEETdata-group13", "videos"
 )
@@ -23,7 +26,8 @@ USE_RAFT_LARGE = False
 
 class OpticalFlowConstansts:
     PADDING_BOX_BOTTOM_FACE = 10
-    VISUALIZE = False
+    VISUALIZE = True
+    VIDEO_TEST = True
     VISUALIZE_EVERY_NUM_FRAMES = 30
     # do not consider all the frames to lower the amount of computations
     KEEP_EVERY_NUM_FRAMES = 10

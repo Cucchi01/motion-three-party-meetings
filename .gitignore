@@ -3,6 +3,7 @@ data/video/
 data/MEETdata-group13/
 data/MEETdata-group13.zip
 .vscode/
+img/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

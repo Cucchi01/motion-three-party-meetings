@@ -1,7 +1,6 @@
-from genericpath import isfile
 import os
 import constants
-from constants import FOLDER_VIDEOS, OpticalFlowConstansts
+from constants import OpticalFlowConstansts
 import cv2
 import dlib
 import numpy as np
@@ -74,16 +73,17 @@ def compute_motions(
     # Read the first frame and convert to grayscale
     ret, prev_frame = cap.read()
     print(f"Quality {prev_frame.shape[0]} X {prev_frame.shape[1]}")
-    prev_frame = cv2.GaussianBlur(
-        prev_frame, (5, 5), 1 / (2 * OpticalFlowConstansts.DOWNSAMPLE_RATE)
-    )  # kernel size and standard deviation
-    prev_frame = cv2.resize(
-        prev_frame,
-        (
-            prev_frame.shape[1] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
-            prev_frame.shape[0] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
-        ),
-    )
+    if OpticalFlowConstansts.DOWNSAMPLE_RATE != 1:
+        prev_frame = cv2.GaussianBlur(
+            prev_frame, (5, 5), 1 / (2 * OpticalFlowConstansts.DOWNSAMPLE_RATE)
+        )  # kernel size and standard deviation
+        prev_frame = cv2.resize(
+            prev_frame,
+            (
+                prev_frame.shape[1] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
+                prev_frame.shape[0] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
+            ),
+        )
     prev_gray = cv2.cvtColor(prev_frame, cv2.COLOR_BGR2GRAY)
 
     # process the remaining frames
@@ -100,16 +100,17 @@ def compute_motions(
             break
 
         # smooth and downsample
-        frame = cv2.GaussianBlur(
-            frame, (5, 5), 1 / (2 * OpticalFlowConstansts.DOWNSAMPLE_RATE)
-        )  # kernel size and standard deviation
-        frame = cv2.resize(
-            frame,
-            (
-                frame.shape[1] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
-                frame.shape[0] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
-            ),
-        )
+        if OpticalFlowConstansts.DOWNSAMPLE_RATE != 1:
+            frame = cv2.GaussianBlur(
+                frame, (5, 5), 1 / (2 * OpticalFlowConstansts.DOWNSAMPLE_RATE)
+            )  # kernel size and standard deviation
+            frame = cv2.resize(
+                frame,
+                (
+                    frame.shape[1] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
+                    frame.shape[0] // OpticalFlowConstansts.DOWNSAMPLE_RATE,
+                ),
+            )
 
         # Convert to grayscale
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -156,6 +157,7 @@ def compute_motions(
             print("Average magnitude: ", list_magnitudes[-1])
             fig, ax = plt.subplots()
             ax.imshow(magnitude)
+            # ax.imshow(magnitude, vmin=0, vmax=60)
             ax.tick_params(
                 axis="y", which="both", left=False, right=False, labelleft=False
             )

@@ -19,6 +19,8 @@ conda install conda-forge::tqdm
 conda install anaconda::pandas
 
 conda install ipykernel
+conda install conda-forge::seaborn
+conda install anaconda::scipy
 ```
 
 

@@ -4,6 +4,7 @@ data/MEETdata-group13/
 data/MEETdata-group13.zip
 .vscode/
 img/
+notebooks/SpeechTechnology.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

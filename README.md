@@ -17,6 +17,8 @@ conda install conda-forge::matplotlib
 conda install conda-forge::av
 conda install conda-forge::tqdm
 conda install anaconda::pandas
+
+conda install ipykernel
 ```
 
 

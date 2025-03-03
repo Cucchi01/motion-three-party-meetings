@@ -16,10 +16,26 @@ FOLDER_VIDEOS_ORIGINAL = Path(
 )
 FOLDER_FEATURES = Path(*CURRENT_PATH.absolute().parts, "data", "features")
 FOLDER_FEATURES_MOTION = FOLDER_FEATURES.joinpath("motions")
+FOLDER_ANNOTATIONS_ORIGINAL = Path(
+    *CURRENT_PATH.absolute().parts, "data", "annotations"
+)
+FOLDER_ANNOTATIONS_PARSED = FOLDER_ANNOTATIONS_ORIGINAL.joinpath("parsed")
+
 
 SHAPE_PREDICTOR_PATH = Path(
     *CURRENT_PATH.absolute().parts, "weights", "shape_predictor_68_face_landmarks.dat"
 )
+
+
+MAP_TO_POSITION = {
+    "SESS001": {"C": "bl", "A": "tl", "B": "br"},
+    "SESS002": {"B": "bl_tr", "C": "br_bc", "A": "tl"},
+    "SESS003": {"A": "tl", "B": "tr", "C": "bc"},
+    "SESS004": {"C": "bc", "B": "tr", "A": "tl"},
+    "SESS005": {"A": "tl", "B": "bl", "C": "br"},
+    "SESS006": {"C": "bc", "B": "tr", "A": "tl"},
+    "SESS009": {"C": "bc", "A": "tl", "B": "tr"},
+}
 
 
 class OpticalFlowConstansts:

@@ -1,5 +1,6 @@
 weights/
 data/video/
+data/annotations/
 data/MEETdata-group13/
 data/MEETdata-group13.zip
 .vscode/

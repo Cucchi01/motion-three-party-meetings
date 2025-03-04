@@ -137,7 +137,7 @@ def parseTurns(path, data, parsed_path):
                 if label_talking == "":
                     label_talking = positions[k]
                 else:
-                    label_talking = label_talking + "_" + positions[k]
+                    label_talking = label_talking + "-" + positions[k]
 
         # manage no person is talking
         if label_talking == "":

@@ -90,9 +90,14 @@ def parseTurns(path, data, parsed_path):
                 start_time, end_time = time_str.split("=")[1].split(",")
                 start_time = float(start_time)
                 end_time = float(end_time)
+                # account for errors in annotation
+                if end_time < start_time:
+                    continue
 
                 times[-1].append([start_time, end_time])
 
+            # manage unordered annotations (sort by start_time)
+            times[-1] = sorted(times[-1], key=lambda x: x[0], reverse=False)
             times_temp = np.array(times[-1])
             times_temp = pd.DataFrame(times_temp, columns=["Start", "End"])
             # save the data
@@ -202,6 +207,9 @@ def parseFocus(path, data, parsed_path):
         start_time, end_time = time_str.split("=")[1].split(",")
         start_time = float(start_time)
         end_time = float(end_time)
+        # account for errors in annotation
+        if end_time < start_time:
+            continue
         type_event = item["body"]["value"]
 
         speakers = map_speakers.get((start_time, end_time), ["NOTAVAILABLE"])
@@ -218,6 +226,8 @@ def parseFocus(path, data, parsed_path):
 
         events[-1].append([start_time, end_time, type_event, label_speakers])
 
+    # manage unordered annotations (sort by start_time)
+    events[-1] = sorted(events[-1], key=lambda x: x[0], reverse=False)
     # save the data
     events_temp = np.array(events[-1])
     events_temp = pd.DataFrame(

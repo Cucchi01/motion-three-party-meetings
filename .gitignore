@@ -5,7 +5,9 @@ data/MEETdata-group13/
 data/MEETdata-group13.zip
 .vscode/
 img/
-notebooks/SpeechTechnology.ipynb
+notebooks/optical_flow_gpu.ipynb
+notebooks/old_version_backup_tasks.ipynb
+notebooks/test.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

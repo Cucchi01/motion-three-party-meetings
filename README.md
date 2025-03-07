@@ -1,15 +1,14 @@
 # Motion in three party meetings
-This repository includes an analysis of motions in the context of 3-party Zoom meetings using the MEET corpus (The MEET Corpus: Collocated, Distant and
-Hybrid Three-party Meetings with a Ranking Task). \\
-The study is based on the intuitive belief that motion provides insights on speech dialogues. In particular, it wants to address:
-- Is it possible to predict the person speaking considering only the overall body motion?
-- Is there a correlation between overall body motion and the tasks performed?
+This repository includes an analysis of motions in the context of 3-party Zoom meetings using the MEET corpus (The MEET Corpus: Collocated, Distant and Hybrid Three-party Meetings with a Ranking Task).  
+The study is based on the intuitive belief that motion provides insights on speech dialogues. In particular, it wants to address:  
+- Is it possible to predict the person speaking considering only the overall body motion?  
+- Is there a correlation between overall body motion and the tasks performed?  
 
 It is used the average optical flow frame by frame as a measure of overall body motion motion.
 
 # Project structure
-The directories `data\annotations`, `data\MEETdata-group13`, `data\video`, `img`, and `weights` are not present because they contain data not publicly available. \\ 
-It is possible to see directly the results in the notebook files. \\
+The directories `data\annotations`, `data\MEETdata-group13`, `data\video`, `img`, and `weights` are not present because they contain data not publicly available.  
+It is possible to see directly the results in the notebook files.  
 
 To run the various scripts from scratch the steps are:
 - follow the Setup section below

@@ -8,19 +8,9 @@ conda update conda
 conda create --name nameEnv python=3.11
 conda activate nameEnv
 
-conda install conda-forge::opencv
-conda install conda-forge::dlib
-
-conda install pytorch::pytorch
-conda install pytorch::torchvision
-conda install conda-forge::matplotlib
-conda install conda-forge::av
-conda install conda-forge::tqdm
-conda install anaconda::pandas
-
-conda install ipykernel
-conda install conda-forge::seaborn
-conda install anaconda::scipy
+conda install -c conda-forge opencv dlib matplotlib av tqdm seaborn
+conda install -c pytorch pytorch torchvision
+conda install -c anaconda pandas ipykernel scipy scikit-learn 
 ```
 
 

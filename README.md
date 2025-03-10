@@ -14,9 +14,10 @@ To run the various scripts from scratch the steps are:
 - follow the Setup section below
 - add the Zoom videos in `data\MEETdata-group13\videos\`
 - run `scripts\divide_sources.py` to separate each channels in the Zoom meeting and then manually filter the channels not needed in `data\video\channels\` 
-- (in case of layout changes in the videos run `scripts\combine_channels.py` modifying the variables at the beginning)
+- (in case of layout changes in the videos, run `scripts\combine_channels.py` modifying the variables at the beginning)
 - run `scripts\optical_flow_pytorch.py`
 - extract json files from Elan and save them in `annotations/`
+- run `scripts\parse_json.py`
 - run the code in `notebooks\data_analysis.ipynb`
 - run the code in `notebooks\tasks.ipynb`
 

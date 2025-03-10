@@ -12,6 +12,7 @@ It is possible to see directly the results in the notebook files.
 
 To run the various scripts from scratch the steps are:
 - follow the Setup section below
+- download the weights for `dlib.shape_predictor` and save them in a directory named `weights`
 - add the Zoom videos in `data\MEETdata-group13\videos\`
 - run `scripts\divide_sources.py` to separate each channels in the Zoom meeting and then manually filter the channels not needed in `data\video\channels\` 
 - (in case of layout changes in the videos, run `scripts\combine_channels.py` modifying the variables at the beginning)

@@ -61,6 +61,7 @@ To run the various scripts from scratch the steps are:
 │
 ├───notebooks
 │       data_analysis.ipynb // notebook containing a data analysis of the average optical flow and extraction of aggregated_Focus_RAFT.csv and aggregated_Turns_RAFT.csv 
+│       optical_flow_gpu.ipynb // similar to scripts/optical_flow_pytorch.py, but runnable online 
 │       tasks.ipynb // analysis of the two tasks
 │
 ├───scripts
@@ -72,7 +73,7 @@ To run the various scripts from scratch the steps are:
 │       parse_json.py // parses the json extracted from the Elan files to csv
 │
 └───weights
-        shape_predictor_68_face_landmarks.dat # weights used for mouth detection
+        shape_predictor_68_face_landmarks.dat // weights used for mouth detection
 
 ```
 

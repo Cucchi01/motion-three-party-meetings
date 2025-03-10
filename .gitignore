@@ -5,7 +5,6 @@ data/MEETdata-group13/
 data/MEETdata-group13.zip
 .vscode/
 img/
-notebooks/optical_flow_gpu.ipynb
 notebooks/old_version_backup_tasks.ipynb
 notebooks/test.ipynb
 
